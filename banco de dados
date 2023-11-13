@@ -1,0 +1,68 @@
+create database db_escola;
+use db_escola;
+
+create table tb_escola(
+nome varchar(50),
+endereco varchar(60),
+CNPJ int not null primary key,
+secretaria int not null,
+turmas int not null,
+telefone char(11) not null
+);
+
+create table tb_funcionarios(
+id_func int not null primary key,
+nome varchar(45) not null,
+CPF int not null,
+funcao varchar(45) not null,
+salario float,
+telefone char(11) not null,
+data_admissao date
+);
+
+create table tb_turmas(
+num_turmas int not null primary key,
+professores int not null,
+alunos int not null,
+sala int not null,
+horarios int not null
+);
+
+create table tb_professores(
+CPF int not null primary key,
+nome varchar (50) not null,
+endereco varchar (60) not null,
+telefone char(14) not null,
+turno varchar(20) not null,
+materia varchar(45) not null
+);
+
+create table tb_salas(
+num_sala int not null primary key,
+descricao varchar(45) not null
+);
+
+create table tb_alunos(
+ numero int not null,
+ CGM int not null primary key,
+ nome varchar(45) not null
+ );
+
+alter table tb_funcionarios add foreign key (CNPJ)
+references tb_escola(CNPJ);
+
+alter table tb_professores add foreign key (num_turmas)
+references tb_turmas(num_turma);
+alter table tb_professores add foreign key (CNPJ)
+references tb_escola(CNPJ);
+
+alter table tb_salas add foreign key (CNPJ)
+references tb_escola(CNPJ);
+
+alter table tb_alunos add foreign key (num_turmas)
+references tb_turmas(num_turmas);
+
+alter table tb_turmas add foreign key (num_sala)
+references tb_salas(num_sala);
+alter table tb_turmas add foreign key (CNPJ)
+references tb_escola(CNPJ);
