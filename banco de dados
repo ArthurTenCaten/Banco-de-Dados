@@ -17,7 +17,8 @@ CPF int not null,
 funcao varchar(45) not null,
 salario float,
 telefone char(11) not null,
-data_admissao date
+data_admissao date,
+turno_func time not null
 );
 
 create table tb_turmas(
@@ -34,7 +35,8 @@ nome varchar (50) not null,
 endereco varchar (60) not null,
 telefone char(14) not null,
 turno varchar(20) not null,
-materia varchar(45) not null
+materia varchar(45) not null,
+salario float not null
 );
 
 create table tb_salas(
@@ -66,3 +68,54 @@ alter table tb_turmas add foreign key (num_sala)
 references tb_salas(num_sala);
 alter table tb_turmas add foreign key (CNPJ)
 references tb_escola(CNPJ);
+
+create index ix_escola on
+ tb_escola (CNPJ);
+ 
+  create index ix_funcionarios on
+ tb_funcionarios (CPF);
+ 
+  create index ix_turmas on
+ tb_turmas (num_turmas);
+ 
+  create index ix_professores on
+ tb_professores (CPF);
+  
+    create index ix_salas on
+ tb_salas (num_sala);
+  
+    create index ix_alunos on
+ tb_alunos (CGM);
+
+insert into tb_funcionarios(id_func, nome, CPF, funcao, salario, telefone, data_admissao, turno_func) values
+(1323626, "Cristiane", '498.246.485-57', "Faxineira", 2000, 8845-7862, 05/04/1997, "Matutino"),
+(2382742, "Douglas", '746.789.142-78', "Cozinheiro", 3400, 8834-7891, 07/12/1956, "Vespertino"),
+(2464642, "Matusalém", '356.829.729-05', "Guarda", 3230, 8892-6572, 18/09/1978, "Noturno");
+
+insert into tb_professores (CPF, nome, endereco, telefone, turno, materia, salario) values
+('456.765.233-35', 'Brausio', "São José", 8893-7854, "Matutino", "Português e Inglês", 3840),
+('274.768.920-78', 'Mirela', "Palhoca", 8802-0912, "Matutino", "Matemática, Educação Financeira, Física e Química", 4560),
+('376.123.897-01', 'Martim', "Florianópolis", 8890-7052, "Matutino", "Educação Física e Artes", 3400),
+('123.456.789-01', 'Edinilson', "Diamante do Oeste", 8875-8910, "Matutino", "Projeto de Vida", 2300),
+
+('920.586.913-09', 'Betina', "Dom Armando", 8893-8809, "Vespertino", "Português, Inglês e Artes", 4000),
+('760.786.917-19', 'Bruna', "Dom Armando", 8873-8749, "Vespertino", "Matemática, Física e Química", 4200),
+('670.546.913-02', 'Arnaldo', "Lucas do Rio Verde", 8810-7819, "Vespertino", "Educação Física", 2440),
+('456.712.798-02', 'Wilson', "Missal", 8845-1243, "Vespertino", "Projeto de Vida", 2300),
+
+('920.586.913-09', 'Carlos', "Rolândia", 8843-1839, "Noturno", "Eduacação Física", 3640),
+('920.586.913-09', 'Christian', "Russas", 8863-4880, "Noturno", "Português e Inglês", 3640),
+('687.253.957-03', 'Gilmar', "Medianeira", 8852-5368, "Noturno", "Projeto de Vida", 2400),
+('920.586.913-09', 'Amanda', "Curitiba", 8813-7216, "Noturno", "Matemática e Física", 5040);
+
+insert into tb_escola (nome, endereco, CNPJ, secretaria, turmas, telefone) values
+('Colégio Estadual General Rogério da Silva', "Belo Horizonte", '12.375.298/0001-00', "Secretaria", "1 até o 4 ano", 3564-7216);
+
+insert into tb_salas (num_sala, descricao) values
+("1 até 20", "Uma sala bonita de 3 metros quadrados, 30 carteiras, com uma carteira especial para o professor!");
+
+alter table tb_funcionarios rename column funcao to profissao;
+alter table tb_professores drop column salario;
+alter table tb_escola drop column secretaria;
+alter table tb_turmas drop column num_turmas;
+
