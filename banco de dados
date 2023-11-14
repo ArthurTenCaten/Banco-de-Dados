@@ -69,23 +69,13 @@ references tb_salas(num_sala);
 alter table tb_turmas add foreign key (CNPJ)
 references tb_escola(CNPJ);
 
-create index ix_escola on
- tb_escola (CNPJ);
- 
-  create index ix_funcionarios on
- tb_funcionarios (CPF);
- 
-  create index ix_turmas on
- tb_turmas (num_turmas);
- 
-  create index ix_professores on
- tb_professores (CPF);
-  
-    create index ix_salas on
- tb_salas (num_sala);
-  
-    create index ix_alunos on
- tb_alunos (CGM);
+CREATE INDEX ix_escola ON tb_escola (CNPJ);
+CREATE INDEX ix_funcionarios ON tb_funcionarios (CPF);
+CREATE INDEX ix_turmas ON tb_turmas (num_turmas);
+CREATE INDEX ix_professores ON tb_professores (CPF);
+CREATE INDEX ix_salas ON tb_salas (num_sala);
+CREATE INDEX ix_alunos ON tb_alunos (CGM);
+
 
 insert into tb_funcionarios(id_func, nome, CPF, funcao, salario, telefone, data_admissao, turno_func) values
 (1323626, "Cristiane", '498.246.485-57', "Faxineira", 2000, 8845-7862, 05/04/1997, "Matutino"),
@@ -119,13 +109,33 @@ alter table tb_professores drop column salario;
 alter table tb_escola drop column secretaria;
 alter table tb_turmas drop column num_turmas;
 
-DELETE FROM  tb_professores
-WHERE "Medianeira";
+DELETE FROM tb_professores WHERE CPF = 'Medianeira';
+DELETE FROM tb_professores WHERE CPF = 'Missal';
+DELETE FROM tb_professores WHERE CPF = 'Diamante do Oeste';
 
-DELETE FROM  tb_professores
-WHERE "Missal";
+SELECT AVG(salario) AS media_salarios FROM tb_funcionarios;
+SELECT SUM(salario) AS soma_salarios FROM tb_funcionarios;
+SELECT MAX(salario) AS salario_maximo FROM tb_funcionarios;
+SELECT MIN(salario) AS salario_minimo FROM tb_funcionarios;
+SELECT COUNT(*) AS total_funcionarios FROM tb_funcionarios;
 
-DELETE FROM  tb_professores
-WHERE "Diamante do Oeste";
+SELECT AVG(salario) AS media_salarios_professores FROM tb_professores;
 
+SELECT COUNT(*) AS total_turmas FROM tb_turmas;
+
+UPDATE tb_funcionarios
+SET salario = 2200
+WHERE id_func = 1323626;
+
+UPDATE tb_professores
+SET turno = 'Vespertino'
+WHERE CPF = '456.765.233-35';
+
+UPDATE tb_escola
+SET endereco = 'Novo Endereço'
+WHERE CNPJ = '12.375.298/0001-00';
+
+UPDATE tb_salas
+SET descricao = 'Nova descrição da sala'
+WHERE num_sala = 1;
 
