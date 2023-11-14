@@ -108,10 +108,11 @@ alter table tb_funcionarios rename column funcao to profissao;
 alter table tb_professores drop column salario;
 alter table tb_escola drop column secretaria;
 alter table tb_turmas drop column num_turmas;
+alter table tb_professores rename column endereco to CEP;
 
-DELETE FROM tb_professores WHERE CPF = 'Medianeira';
-DELETE FROM tb_professores WHERE CPF = 'Missal';
-DELETE FROM tb_professores WHERE CPF = 'Diamante do Oeste';
+DELETE FROM tb_professores WHERE CEP = 'Medianeira';
+DELETE FROM tb_professores WHERE CEP = 'Missal';
+DELETE FROM tb_professores WHERE CEP = 'Diamante do Oeste';
 
 SELECT AVG(salario) AS media_salarios FROM tb_funcionarios;
 SELECT SUM(salario) AS soma_salarios FROM tb_funcionarios;
@@ -132,7 +133,7 @@ SET turno = 'Vespertino'
 WHERE CPF = '456.765.233-35';
 
 UPDATE tb_escola
-SET endereco = 'Novo Endereço'
+SET CEP = 'Novo CEP'
 WHERE CNPJ = '12.375.298/0001-00';
 
 UPDATE tb_salas
