@@ -119,3 +119,12 @@ alter table tb_professores drop column salario;
 alter table tb_escola drop column secretaria;
 alter table tb_turmas drop column num_turmas;
 
+DELETE FROM  tb_professores
+WHERE "Medianeira"
+
+DELETE FROM  tb_professores
+WHERE "Missal"
+
+DELETE FROM  tb_professores
+WHERE "Diamante do Oeste"
+
