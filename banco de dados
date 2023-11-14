@@ -139,3 +139,4 @@ UPDATE tb_salas
 SET descricao = 'Nova descrição da sala'
 WHERE num_sala = 1;
 
+DROP DATABASE IF EXISTS db_escola;
