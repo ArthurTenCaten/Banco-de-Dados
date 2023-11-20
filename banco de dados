@@ -32,7 +32,7 @@ horarios int not null
 create table tb_professores(
 CPF int not null primary key,
 nome varchar (50) not null,
-endereco varchar (60) not null,
+CEP varchar (60) not null,
 telefone char(14) not null,
 turno varchar(20) not null,
 materia varchar(45) not null,
